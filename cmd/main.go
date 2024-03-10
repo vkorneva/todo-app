@@ -3,11 +3,15 @@ package main
 import (
 	"github.com/vkorneva/todo-app"
 	"github.com/vkorneva/todo-app/pkg/handler"
+	"github.com/vkorneva/todo-app/pkg/repository"
+	"github.com/vkorneva/todo-app/pkg/service"
 	"log"
 )
 
 func main() {
-	handlers := new(handler.Handler)
+	repos := repository.NewRepository()
+	services := service.NewService(repos)
+	handlers := handler.NewHandler(services)
 
 	srv := new(todo.Server)
 
